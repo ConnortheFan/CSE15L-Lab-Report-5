@@ -1,64 +1,73 @@
-# Grep Variants
-## grep
+# Grading Script
 
-`grep` is a command used on the bash command-line. The most basic format for it is `grep "[keyword]" [directories]` where `[keyword]` is replaced with a string you want to search for and [directories] is the files that you want to search for that keyword. By default, grep will return the line that contains the word with the file path. By using various options, you can change how it searches or the output. These options are placed after `grep` and before the keyword. When using multiple options, you can either format them as `-l -r` or as `-lr`.
+![Screenshot 2023-03-12 232128](https://user-images.githubusercontent.com/110417453/224623179-b39d635e-4bc5-49a5-9c8a-05b815e4633f.png)
+![Screenshot 2023-03-12 232149](https://user-images.githubusercontent.com/110417453/224623351-530cb9fe-7af1-4fd9-8acf-1435dc2235ec.png)
+![Screenshot 2023-03-12 232204](https://user-images.githubusercontent.com/110417453/224623410-d3d8a1da-44cb-4f0d-ac69-71f619cfa0a7.png)
 
-## -l
+This grading script was made in collaboration by me and my partner Alon. The different CPATH's on lines 1 and 2 are the result of running the grading script on different operating systems. If this script were to be used on a LINUX/MAC environment, like the ieng6 remote server, then the first CPATH should be used, but on a WINDOWS environment, use the second CPATH. 
 
-`-l` will only show the names of the files where a word match is found rather than the line with the words. It is useful if you need to find only the files containing a certain keyword without needing the exact passage itself.
+Lines 4-8 were initially made to tell the user if they forgot to include an argument and just ran `bash grade.sh`. However, we found this unnecessary because the code would report a bug anyways.
 
-![Screenshot_20230213_095414](https://user-images.githubusercontent.com/110417453/218652353-29c3a057-b0e0-4144-9d72-310ec4bb1175.png)
+Line 10 removes the previous student submission, so the grade script runs on a fresh slate every time.
 
-In this example, I needed to find the files containing the keyword `vista` within the directory `written2/travel_guides/berlitz1`. Using `-l`, I was able to keep the output short and simple for further use, such as redirecting the output into a .txt file.
+Lines 11-12 clone the github repository into a folder called `student-submission`, and report if the cloning was finished.
 
-![Screenshot_20230213_101641](https://user-images.githubusercontent.com/110417453/218654955-f2acd5bd-8688-43d6-a02a-6d98b1dba8e6.png)
+Lines 14-20 check if the correct files exist by using the `-e` command, which check for existing files.
 
-This is another similar example, but using multiple directories. It uses the same directory as the previous example, but also the `written2/travel_guides/berlitz2` directory as well. `-l` continues to work with multiple directories, printing only the file names with `vista`.
+Lines 22-24 copy over all necessary resources into the `student-submission` file and then moved the current directory to `student-submission`.
 
-Source: 
-[Finding a File Containing a Particular Text String In Linux Server](https://www.cyberciti.biz/faq/howto-search-find-file-for-text-string/#:~:text=You%20need%20to%20use%20the,match%20or%20a%20text%20string.)
+Line 26 sets the option to stop the command when encountering an error.
 
-## -r
+Lines 27-35 compile the code and report whether it was successful.
 
-`-r` allows you to recursively search through a directory for files, rather than only being able to look through one directory. This is helpful if you have files and directories that are nested, while wanting to search through all of them.
+Line 37 runs the tests and puts it into test-results.txt
 
-![Screenshot_20230213_095514](https://user-images.githubusercontent.com/110417453/218652374-56a29191-270e-4caf-b7ab-26d45b859f1e.png)
+Line 39 formats the terminal to show the results of the test.
 
-In this example, I use `-r` to search through all the files within the `written2/` directory. `written2/` has multiple nested directories inside it, so using `-r` made it convenient to find `Lucayans` out of all the files and directories within.
+Lines 44-46 create color variables, for nicer looking output.
 
-![Screenshot_20230213_095534](https://user-images.githubusercontent.com/110417453/218652384-b4be28bc-3539-41e1-8901-d12fe71f8a44.png)
+Lines 48-50 check for an OK test result, with no tests failing.
 
-This is another example of using `-r`, but it is used in conjunction with `-l` as `-rl`. The particular order of options doesn't matter as `-lr` would work the same. This allowed me to search through all files within `written2/` and only show the file names, which helps make searching more convenient.
+Lines 53-64 check if there were any failed tests, and display which ones failed.
 
-Source: 
-[Finding a File Containing a Particular Text String In Linux Server](https://www.cyberciti.biz/faq/howto-search-find-file-for-text-string/#:~:text=You%20need%20to%20use%20the,match%20or%20a%20text%20string.)
+## list-methods-lab3
 
-## -n
+![image](https://user-images.githubusercontent.com/110417453/224623603-5d701e85-5ff6-4668-a042-cac4a74a456f.png)
 
-The `-n` option shows the line number that the word is found on. You can find the line number after the file name, before the text itself. This is useful if you want to both search for the file that contains a word, but also find the exact location in that file with the word.
+This code is the same as the starter code, and and therefore should fail some tests due to not having implementation. As seen, it displays the correct result, although it doesn't show which test failed, which may be a bug.
 
-![Screenshot_20230213_101001](https://user-images.githubusercontent.com/110417453/218654007-e06e59c5-492f-4823-ba2d-121ac77d8142.png)
+## list-methods-corrected
 
-Here `-n` is used to find `vista` along with the line number that the word is on. It can be seen directly after the file name and before the line of text that contains the word. This is useful if I were to go to that file and wanted to find the word in the file exactly.
+![image](https://user-images.githubusercontent.com/110417453/224623785-54e38c69-2d40-4e6d-b601-871721c51b35.png)
 
-![Screenshot_20230213_101045](https://user-images.githubusercontent.com/110417453/218654043-466c82da-20c2-4df9-a5dc-2f4b4231d6df.png)
+This code has correct implementation, and displays that all tests passed, which is expected.
 
-Here `-n` is being used with `-r` as `-nr` along with `--color`, which will be covered in the next section. `grep` is searching through all of `written2/` for the word `Lucayans` and with the results, the line number is shown as well, in color after the file name. The use is similar to that of `-n` and `-r`, but combined.
+## list-methods-compile-error
 
-Source: 
-[Finding a File Containing a Particular Text String In Linux Server](https://www.cyberciti.biz/faq/howto-search-find-file-for-text-string/#:~:text=You%20need%20to%20use%20the,match%20or%20a%20text%20string.)
+![image](https://user-images.githubusercontent.com/110417453/224623904-a58a4147-f1c3-4e07-970c-cf9519da3af8.png)
 
-## --color
+This code has a syntax error of a missing semicolon, so it isn't expected to compile, which is shown in the output when it says, `Failed to compile` as well as the location of the error.
 
-`--color` color codes your output to make it easier for you to find various important information. It changes the color of the file name, line number, and word within the text to make it easier and faster to extract information.
+## list-methods-signiature
 
-![Screenshot_20230213_095845](https://user-images.githubusercontent.com/110417453/218652435-9445c3ef-e7cc-4f70-b7fb-ef9c1057422c.png)
+![image](https://user-images.githubusercontent.com/110417453/224624068-fff31a66-28d2-4edf-bfc0-fcd5d1aaf004.png)
 
-Here `grep` is searching recursively with `-r` for the word `vistas` in `written2/`. As seen by the output, the word itself is colored red, while the file name is purple. These colors make it easier to locate the word, which would be useful if you needed to find surrounding words or to find which instances counted `vistas` or some word that contains `vista` within it coincidentally.
+This code has the arguments of `filter` in the wrong order, so it doesn't match the expected behavior. However, it passed all tests, which is a sign that somewhere the grade script could be improved to check for this. Perhaps, by checking for certain lines within the code, could it search for incorrect method signatures.
 
-![Screenshot_20230213_095811](https://user-images.githubusercontent.com/110417453/218652420-b681536d-a344-4e1e-a524-54328a58ece0.png)
+## list-methods-filename
 
-Here `grep` looks for `Lucayans` in `written2/` using `-r`. The line where `Lucayans` is found is displayed, but since the line is so long, it may be difficult to find the word exactly in the text. `--color` makes `Lucayans` red in the text, which draws you eyes to it and makes is extremely easy to locate it.
+![image](https://user-images.githubusercontent.com/110417453/224624144-c86fe5ea-447b-4d18-b73d-abc3a6127511.png)
 
-Source: 
-[Finding a File Containing a Particular Text String In Linux Server](https://www.cyberciti.biz/faq/howto-search-find-file-for-text-string/#:~:text=You%20need%20to%20use%20the,match%20or%20a%20text%20string.)
+This code has great implementation in a file with the wrong name. It is expected that since the name is incorrect, the grader should report that it is unable to find the file, which it correctly does.
+
+## list-methods-nested
+
+![image](https://user-images.githubusercontent.com/110417453/224624228-a48b8243-8be9-43db-ae6a-e24721ef180a.png)
+
+This code has great implementation in a nested directory called `pa1`. Since the code is in a nested directory, the student clearly did not follow instructions for submitting their assignment, therefore I expect the grading script to report that it couldn't find the file, which it properly does.
+
+## list-examples-subtle
+
+![image](https://user-images.githubusercontent.com/110417453/224624327-afc9566b-00b0-4d8b-98e1-8fdb85e48531.png)
+
+This code has more subtle bugs, like using `==` instead of `.equals()`. However, since it only needs to compare to the tests, it should still fail the proper tests and display the correct output, which it does.
